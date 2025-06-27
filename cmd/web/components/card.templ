@@ -1,0 +1,40 @@
+package components
+
+import "github.com/abbesm0hamed/portfolio/cmd/models"
+
+templ ExperienceCard(exp models.Experience) {
+	<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 mb-4">
+		<div class="flex justify-between items-start mb-3">
+			<div>
+				<h3 class="text-xl font-semibold text-gray-900">{ exp.Title }</h3>
+				<p class="text-lg text-emerald-600 font-medium">{ exp.Company }</p>
+				<p class="text-sm text-gray-500">{ exp.Location }</p>
+			</div>
+			<div class="text-right">
+				<p class="text-sm text-gray-600">
+					{ exp.GetStartDate() } - 
+					if exp.Current {
+						<span class="text-emerald-600 font-medium">Present</span>
+					} else {
+						{ exp.GetDuration() }
+					}
+				</p>
+			</div>
+		</div>
+		
+		<div class="mb-4">
+			<p class="text-gray-700 leading-relaxed">{ exp.Description }</p>
+		</div>
+		
+		if len(exp.Technologies) > 0 {
+			<div class="flex flex-wrap gap-2">
+				for _, tech := range exp.Technologies {
+					<span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full">
+						{ tech }
+					</span>
+				}
+			</div>
+		}
+	</div>
+}
+

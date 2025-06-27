@@ -1,0 +1,28 @@
+package views
+
+import (
+"github.com/abbesm0hamed/portfolio/cmd/models"
+"github.com/abbesm0hamed/portfolio/cmd/web/components"
+)
+
+templ ExperiencesPage(experiences []models.Experience) {
+@Base(){
+@components.Container(ExperiencesContent(experiences))
+}
+}
+
+templ ExperiencesContent(experiences []models.Experience) {
+@components.PageTitle("Work Experience")
+
+<div class="space-y-6">
+  if len(experiences) == 0 {
+  <div class="text-center py-12">
+    <p class="text-gray-500 text-lg">No experiences found.</p>
+  </div>
+  } else {
+  for _, exp := range experiences {
+  @components.ExperienceCard(exp)
+  }
+  }
+</div>
+}
