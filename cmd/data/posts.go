@@ -76,15 +76,23 @@ func parsePost(filename string) (*models.Post, error) {
 	}
 	post.ParsedDate = parsedDate
 
-	// Convert markdown to HTML
+	// Convert markdown to HTML with enhanced configuration
 	md := goldmark.New(
-		goldmark.WithExtensions(extension.GFM),
+		goldmark.WithExtensions(
+			extension.GFM,
+			extension.Table,
+			extension.Strikethrough,
+			extension.Linkify,
+			extension.TaskList,
+		),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),
+			parser.WithAttribute(),
 		),
 		goldmark.WithRendererOptions(
 			html.WithHardWraps(),
 			html.WithXHTML(),
+			html.WithUnsafe(), // Allow HTML in markdown (be careful with user input)
 		),
 	)
 
@@ -93,6 +101,22 @@ func parsePost(filename string) (*models.Post, error) {
 		return nil, err
 	}
 
-	post.Content = buf.String()
+	// Post-process HTML to add image classes and handle relative paths
+	processedContent := processImagePaths(buf.String())
+	post.Content = processedContent
+
 	return &post, nil
+}
+
+// processImagePaths handles image path processing and adds proper classes
+func processImagePaths(content string) string {
+	// Replace relative image paths with absolute paths
+	// Images are stored in /cmd/web/assets/images/posts/
+	content = strings.ReplaceAll(content, `src="./images/`, `src="/assets/images/posts/`)
+	content = strings.ReplaceAll(content, `src="images/`, `src="/assets/images/posts/`)
+
+	// Add responsive classes to images
+	content = strings.ReplaceAll(content, `<img`, `<img class="blog-image"`)
+
+	return content
 }

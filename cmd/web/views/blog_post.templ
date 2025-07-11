@@ -12,27 +12,250 @@ templ BlogPost(post *models.Post) {
 }
 
 templ BlogPostContent(post *models.Post) {
-<article class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
-  <header class="mb-8 border-b pb-6">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">{ post.Title }</h1>
-    <div class="flex items-center justify-between text-gray-600">
-      <span class="text-sm">Published on { post.Date }</span>
+<article class="bg-white rounded-xl shadow-xl p-6 sm:p-8 lg:p-12 max-w-4xl mx-auto">
+  <header class="mb-10 border-b border-gray-100 pb-8">
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+      { post.Title }
+    </h1>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-gray-600">
+      <span class="text-sm font-medium">Published on { post.Date }</span>
       <div class="flex flex-wrap gap-2">
         for _, tag := range post.Tags {
-        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+        <span
+          class="px-3 py-1 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200 hover:border-blue-300 transition-colors">
           { tag }
         </span>
         }
       </div>
     </div>
   </header>
-  <div class="prose lg:prose-lg mx-auto">
+
+  <div class="blog-content">
     @templ.Raw(post.Content)
   </div>
-  <footer class="mt-12 pt-6 border-t border-gray-200">
-    <a href="/blog" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
-      ← Back to Blog
+
+  <footer class="mt-16 pt-8 border-t border-gray-100">
+    <a href="/blog"
+      class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors group">
+      <svg class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor"
+        viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to Blog
     </a>
   </footer>
 </article>
+
+<style>
+  .blog-content {
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  .blog-content h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #dbeafe;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .blog-content h2::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: linear-gradient(to bottom, #3b82f6, #4f46e5);
+    border-radius: 2px;
+    margin-right: 12px;
+  }
+
+  .blog-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-content p {
+    color: #374151;
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  .blog-content ul,
+  .blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .blog-content li {
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .blog-content ul li {
+    list-style: none;
+  }
+
+  .blog-content ul li::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    background: #3b82f6;
+    border-radius: 50%;
+  }
+
+  .blog-content pre {
+    background: #1f2937;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+  .blog-content pre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    background: #374151;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .blog-content pre::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    box-shadow: 16px 0 0 #f59e0b, 32px 0 0 #10b981;
+  }
+
+  .blog-content code {
+    background: #f3f4f6;
+    color: #1f2937;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .blog-content pre code {
+    background: transparent;
+    color: #f9fafb;
+    padding: 0;
+    display: block;
+    padding-top: 2rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid #3b82f6;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 1.5rem 0;
+    background: #eff6ff;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .blog-content blockquote p {
+    color: #374151;
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  .blog-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: #93c5fd;
+    transition: all 0.2s;
+  }
+
+  .blog-content a:hover {
+    color: #1d4ed8;
+    text-decoration-color: #3b82f6;
+  }
+
+  .blog-content img {
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .blog-content th {
+    background: #f9fafb;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #111827;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .blog-content td {
+    padding: 1rem;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .blog-content tr:hover {
+    background: #f9fafb;
+  }
+
+  .blog-content strong {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .blog-content em {
+    font-style: italic;
+    color: #4b5563;
+  }
+
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 2rem 0;
+  }
+</style>
 }
