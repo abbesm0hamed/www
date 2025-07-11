@@ -15,6 +15,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	// Initialize repositories
 	experienceRepo := repository.NewInMemoryExperienceRepository()
 	projectRepo := repository.NewInMemoryProjectRepository()
+	blogRepo := repository.NewInMemoryBlogRepository()
 
 	// Initialize services
 	emailService := services.NewEmailService()
@@ -23,6 +24,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 	experienceHandler := handlers.NewExperienceHandler(experienceRepo)
 	projectHandler := handlers.NewProjectHandler(projectRepo)
 	contactHandler := handlers.NewContactHandler(emailService)
+	blogHandler := handlers.NewBlogHandler(blogRepo)
 
 	// Register routes
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -35,12 +37,14 @@ func (s *Server) RegisterRoutes() http.Handler {
 		}
 	})
 
-	// Other routes
 	mux.HandleFunc("/about", handlers.AboutPage)
 	mux.HandleFunc("/contact", contactHandler.ContactPage)
 	mux.HandleFunc("/contact/submit", contactHandler.HandleContactForm)
 	mux.HandleFunc("/experiences", experienceHandler.ExperiencesPage)
 	mux.HandleFunc("/projects", projectHandler.ProjectsPage)
+	// Blog routes
+	mux.HandleFunc("/blog", blogHandler.BlogListPage)
+	mux.HandleFunc("/blog/", blogHandler.BlogPostPage)
 
 	// Static files
 	fileServer := http.FileServer(http.FS(web.Files))

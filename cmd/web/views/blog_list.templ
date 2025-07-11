@@ -1,0 +1,48 @@
+package views
+
+import (
+"github.com/abbesm0hamed/portfolio/cmd/models"
+"github.com/abbesm0hamed/portfolio/cmd/web/components"
+)
+
+templ BlogList(posts []*models.Post) {
+@Base("Blog - Portfolio") {
+@components.Container(BlogListContent(posts))
+}
+}
+
+templ BlogListContent(posts []*models.Post) {
+@components.PageTitle("Blog")
+<div class="space-y-8">
+  if len(posts) == 0 {
+  <div class="text-center py-12">
+    <p class="text-gray-500 text-lg">No blog posts found.</p>
+  </div>
+  } else {
+  for _, post := range posts {
+  @BlogCard(post)
+  }
+  }
+</div>
+}
+
+templ BlogCard(post *models.Post) {
+<article class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+  <h2 class="text-2xl font-bold text-gray-900 mb-2">
+    <a href={ templ.URL("/blog/" + post.Slug) } class="hover:text-blue-600">
+      { post.Title }
+    </a>
+  </h2>
+  <p class="text-gray-600 mb-4">{ post.Description }</p>
+  <div class="flex items-center justify-between">
+    <div class="flex flex-wrap gap-2">
+      for _, tag := range post.Tags {
+      <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+        { tag }
+      </span>
+      }
+    </div>
+    <span class="text-sm text-gray-500">{ post.Date }</span>
+  </div>
+</article>
+}

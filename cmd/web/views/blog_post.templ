@@ -1,0 +1,114 @@
+package views
+
+import (
+"github.com/abbesm0hamed/portfolio/cmd/models"
+"github.com/abbesm0hamed/portfolio/cmd/web/components"
+)
+
+templ BlogPost(post *models.Post) {
+@Base(post.Title + " - Portfolio") {
+@components.Container(BlogPostContent(post))
+}
+}
+
+templ BlogPostContent(post *models.Post) {
+<article class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+  <header class="mb-8 border-b pb-6">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">{ post.Title }</h1>
+    <div class="flex items-center justify-between text-gray-600">
+      <span class="text-sm">Published on { post.Date }</span>
+      <div class="flex flex-wrap gap-2">
+        for _, tag := range post.Tags {
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+          { tag }
+        </span>
+        }
+      </div>
+    </div>
+  </header>
+  <div class="blog-content text-gray-800 leading-relaxed">
+    @templ.Raw(post.Content)
+  </div>
+  <style>
+    .blog-content h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem 0;
+      color: #1f2937;
+    }
+
+    .blog-content h2 {
+      font-size: 1.875rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem 0;
+      color: #374151;
+    }
+
+    .blog-content h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.5rem 0;
+      color: #374151;
+    }
+
+    .blog-content p {
+      margin-bottom: 1rem;
+      line-height: 1.75;
+    }
+
+    .blog-content pre {
+      background-color: #f3f4f6;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid #e5e7eb;
+    }
+
+    .blog-content code {
+      background-color: #f3f4f6;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      font-family: 'Courier New', monospace;
+    }
+
+    .blog-content pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .blog-content ul,
+    .blog-content ol {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .blog-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-content blockquote {
+      border-left: 4px solid #3b82f6;
+      padding-left: 1rem;
+      margin: 1rem 0;
+      font-style: italic;
+      color: #6b7280;
+    }
+
+    .blog-content a {
+      color: #3b82f6;
+      text-decoration: underline;
+    }
+
+    .blog-content a:hover {
+      color: #1d4ed8;
+    }
+  </style>
+  <footer class="mt-12 pt-6 border-t border-gray-200">
+    <a href="/blog" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+      ← Back to Blog
+    </a>
+  </footer>
+</article>
+}
