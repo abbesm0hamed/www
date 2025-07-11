@@ -1,0 +1,151 @@
+package views
+
+import "github.com/abbesm0hamed/portfolio/cmd/web/components"
+
+templ ContactPage() {
+@Base("Contact - Portfolio"){
+@components.Container(ContactContent())
+}
+}
+
+templ ContactContent() {
+@components.PageTitle("Get In Touch")
+
+<div class="text-center mb-8">
+  <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+    Have a project in mind or just want to say hello? I'd love to hear from you.
+  </p>
+</div>
+
+<div class="max-w-2xl mx-auto">
+  <div class="bg-white rounded-lg shadow-md p-8">
+    @ContactForm()
+  </div>
+</div>
+}
+
+templ ContactForm() {
+<form id="contact-form" hx-post="/contact/submit" hx-target="#form-response" hx-swap="innerHTML"
+  hx-indicator="#loading-indicator" class="space-y-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+        Name *
+      </label>
+      <input type="text" id="name" name="name" required
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+        placeholder="Your full name" />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+        Email *
+      </label>
+      <input type="email" id="email" name="email" required
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+        placeholder="your.email@example.com" />
+    </div>
+  </div>
+
+  <div>
+    <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+      Subject *
+    </label>
+    <input type="text" id="subject" name="subject" required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="What's this about?" />
+  </div>
+
+  <div>
+    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+      Message *
+    </label>
+    <textarea id="message" name="message" rows="6" required
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+      placeholder="Tell me about your project or just say hello..."></textarea>
+  </div>
+
+  <div class="flex justify-end">
+    <button type="submit"
+      class="bg-emerald-600 text-white px-6 py-3 rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors duration-200 flex items-center">
+      <span id="loading-indicator" class="htmx-indicator">
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+          </path>
+        </svg>
+        Sending...
+      </span>
+      <span class="htmx-indicator-hidden">Send Message</span>
+    </button>
+  </div>
+</form>
+
+<div id="form-response" class="mt-6"></div>
+}
+
+templ ContactFormSuccess() {
+<div class="bg-green-50 border border-green-200 rounded-md p-4">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-green-800">Message sent successfully!</h3>
+      <p class="text-sm text-green-700 mt-1">
+        Thank you for reaching out. I'll get back to you as soon as possible.
+      </p>
+    </div>
+  </div>
+</div>
+<script>
+  // Reset form after successful submission
+  document.getElementById('contact-form').reset();
+</script>
+}
+
+templ ContactFormError(message string) {
+<div class="bg-red-50 border border-red-200 rounded-md p-4">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-red-800">Error sending message</h3>
+      <p class="text-sm text-red-700 mt-1">{ message }</p>
+    </div>
+  </div>
+</div>
+}
+
+templ ContactFormErrors(errors map[string]string) {
+<div class="bg-red-50 border border-red-200 rounded-md p-4">
+  <div class="flex">
+    <div class="flex-shrink-0">
+      <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="ml-3">
+      <h3 class="text-sm font-medium text-red-800">Please fix the following errors:</h3>
+      <ul class="text-sm text-red-700 mt-1 list-disc list-inside">
+        for _, error := range errors {
+        <li>{ error }</li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>
+}

@@ -1,40 +1,50 @@
 package server
 
 import (
-	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/abbesm0hamed/portfolio/cmd/repository"
+	"github.com/abbesm0hamed/portfolio/cmd/services"
 	"github.com/abbesm0hamed/portfolio/cmd/web"
 	"github.com/abbesm0hamed/portfolio/cmd/web/handlers"
 )
 
 func (s *Server) RegisterRoutes() http.Handler {
 	mux := http.NewServeMux()
+
+	// Initialize repositories
 	experienceRepo := repository.NewInMemoryExperienceRepository()
+	projectRepo := repository.NewInMemoryProjectRepository()
+
+	// Initialize services
+	emailService := services.NewEmailService()
+
+	// Initialize handlers
 	experienceHandler := handlers.NewExperienceHandler(experienceRepo)
+	projectHandler := handlers.NewProjectHandler(projectRepo)
+	contactHandler := handlers.NewContactHandler(emailService)
 
 	// Register routes
-	mux.HandleFunc("/", s.portfolioHandler)
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/" {
+			// Home page
+			handlers.HomeHandler(w, r)
+		} else {
+			// Any other unmatched path → 404
+			handlers.NotFoundHandler(w, r)
+		}
+	})
 
+	// Other routes
+	mux.HandleFunc("/about", handlers.AboutPage)
+	mux.HandleFunc("/contact", contactHandler.ContactPage)
+	mux.HandleFunc("/contact/submit", contactHandler.HandleContactForm)
+	mux.HandleFunc("/experiences", experienceHandler.ExperiencesPage)
+	mux.HandleFunc("/projects", projectHandler.ProjectsPage)
+
+	// Static files
 	fileServer := http.FileServer(http.FS(web.Files))
 	mux.Handle("/assets/", fileServer)
-	mux.HandleFunc("/experiences", experienceHandler.ExperiencesPage)
 
-	// Wrap the mux with CORS middleware
 	return s.CorsMiddleware(mux)
-}
-
-func (s *Server) portfolioHandler(w http.ResponseWriter, r *http.Request) {
-	resp := map[string]string{"message": "Welcome to abbes portfolio"}
-	jsonResp, err := json.Marshal(resp)
-	if err != nil {
-		http.Error(w, "Failed to marshal response", http.StatusInternalServerError)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	if _, err := w.Write(jsonResp); err != nil {
-		log.Printf("Failed to write response: %v", err)
-	}
 }

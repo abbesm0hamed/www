@@ -6,7 +6,7 @@ import (
 )
 
 templ ExperiencesPage(experiences []models.Experience) {
-@Base(){
+@Base("Experiences - Portfolio"){
 @components.Container(ExperiencesContent(experiences))
 }
 }

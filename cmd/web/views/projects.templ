@@ -1,0 +1,28 @@
+package views
+
+import (
+"github.com/abbesm0hamed/portfolio/cmd/models"
+"github.com/abbesm0hamed/portfolio/cmd/web/components"
+)
+
+templ ProjectsPage(projects []models.Project) {
+@Base("Projects - Portfolio"){
+@components.Container(ProjectsContent(projects))
+}
+}
+
+templ ProjectsContent(projects []models.Project) {
+@components.PageTitle("Porjects")
+
+<div class="space-y-6">
+  if len(projects) == 0 {
+  <div class="text-center py-12">
+    <p class="text-gray-500 text-lg">No projects found.</p>
+  </div>
+  } else {
+  for _, prj := range projects {
+  @components.ProjectCard(prj)
+  }
+  }
+</div>
+}

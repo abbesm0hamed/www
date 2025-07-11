@@ -1,0 +1,145 @@
+package views
+
+import "github.com/abbesm0hamed/portfolio/cmd/web/components"
+
+templ AboutPage() {
+@Base("About - Portfolio") {
+@components.Container(AboutContent())
+}
+}
+
+templ AboutContent() {
+@components.PageTitle("About Me")
+
+<div class="space-y-8">
+  <!-- Introduction Section -->
+  <div class="bg-white rounded-lg shadow-md p-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Who I Am</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      I'm a passionate software developer with a love for creating elegant solutions to complex problems. 
+      With a background in both frontend and backend development, I enjoy building full-stack applications 
+      that make a difference in people's lives.
+    </p>
+    <p class="text-gray-700 leading-relaxed">
+      When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
+      or sharing knowledge with the developer community.
+    </p>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="bg-white rounded-lg shadow-md p-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Skills & Technologies</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-3">Frontend Development</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            React & Next.js
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            TypeScript & JavaScript
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            Tailwind CSS & Styled Components
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            HTML5 & CSS3
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-3">Backend Development</h3>
+        <ul class="space-y-2 text-gray-700">
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            Go (Golang)
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            Node.js & Express
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            PostgreSQL & MongoDB
+          </li>
+          <li class="flex items-center">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></span>
+            RESTful APIs & GraphQL
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience Section -->
+  <div class="bg-white rounded-lg shadow-md p-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">What I Do</h2>
+    <div class="space-y-6">
+      <div class="flex items-start space-x-4">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Web Development</h3>
+          <p class="text-gray-700 mt-1">
+            Building responsive, user-friendly web applications with modern technologies and best practices.
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex items-start space-x-4">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Mobile Development</h3>
+          <p class="text-gray-700 mt-1">
+            Creating cross-platform mobile applications using React Native and other modern frameworks.
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex items-start space-x-4">
+        <div class="flex-shrink-0">
+          <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Problem Solving</h3>
+          <p class="text-gray-700 mt-1">
+            Analyzing complex problems and designing efficient, scalable solutions that meet business requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact CTA -->
+  <div class="bg-emerald-50 rounded-lg p-8 text-center">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Let's Work Together</h2>
+    <p class="text-gray-700 mb-6">
+      I'm always interested in new opportunities and exciting projects. 
+      Whether you have a question or want to discuss a potential collaboration, 
+      I'd love to hear from you.
+    </p>
+    <a href="/contact" class="inline-block bg-emerald-600 text-white px-8 py-3 rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-medium">
+      Get In Touch
+    </a>
+  </div>
+</div>
+}

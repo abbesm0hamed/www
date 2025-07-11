@@ -1,0 +1,25 @@
+package views
+import "github.com/abbesm0hamed/portfolio/cmd/web/components"
+
+templ Home() {
+@Base("Abbes Portfolio") {
+@components.PageTitle("Welcome to abbes Portfolio")
+@components.Container(homeContent())
+}
+}
+
+templ homeContent() {
+<div class="text-center space-y-6">
+	<h1 class="text-4xl font-bold text-gray-800">Hi, I'm Abbes</h1>
+	<p class="text-xl text-gray-600">Software Developer & Problem Solver</p>
+	<div class="flex justify-center space-x-4">
+		<a href="/experiences" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors">
+			View Experience
+		</a>
+		<a href="#contact"
+			class="border border-blue-500 text-blue-500 hover:bg-blue-50 px-6 py-3 rounded-lg transition-colors">
+			Contact Me
+		</a>
+	</div>
+</div>
+}
