@@ -1,0 +1,27 @@
+package components
+
+import "github.com/abbesm0hamed/portfolio/cmd/models"
+
+templ SkillCard(skill models.Skill) {
+	<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6">
+		<div class="mb-3">
+			<h3 class="text-xl font-semibold text-gray-900">{ skill.Name }</h3>
+			<p class="text-sm text-emerald-600 font-medium">{ skill.Category } - { skill.Level }</p>
+			<p class="text-sm text-gray-500">{ skill.YearsOfExp } years of experience</p>
+		</div>
+
+		<div class="mb-4">
+			<p class="text-gray-700 leading-relaxed">{ skill.Description }</p>
+		</div>
+
+		if len(skill.Technologies) > 0 {
+			<div class="flex flex-wrap gap-2">
+				for _, tech := range skill.Technologies {
+					<span class="inline-block bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-full">
+						{ tech }
+					</span>
+				}
+			</div>
+		}
+	</div>
+}

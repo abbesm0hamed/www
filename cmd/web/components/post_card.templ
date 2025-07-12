@@ -1,0 +1,28 @@
+package components
+
+import "github.com/abbesm0hamed/portfolio/cmd/models"
+
+templ PostCard(post *models.Post) {
+	<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6 mb-4">
+		<div class="flex justify-between items-start mb-3">
+			<div>
+				<h3 class="text-xl font-semibold text-gray-900"><a href="{ post.Slug }" class="hover:underline">{ post.Title }</a></h3>
+				<p class="text-sm text-gray-500">Published on: { post.ParsedDate.Format("January 2, 2006") }</p>
+			</div>
+		</div>
+
+		<div class="mb-4">
+			<p class="text-gray-700 leading-relaxed">{ post.Description }</p>
+		</div>
+
+		if len(post.Tags) > 0 {
+			<div class="flex flex-wrap gap-2">
+				for _, tag := range post.Tags {
+					<span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
+						{ tag }
+					</span>
+				}
+			</div>
+		}
+	</div>
+}
