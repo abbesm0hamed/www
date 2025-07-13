@@ -12,7 +12,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	experiences := data.GetExperiences()
 	skills := data.GetSkills()
 	projects := data.GetProjects()
-	posts, err := data.LoadPosts()
+	posts, err := data.GetPosts()
 	if err != nil {
 		// Handle error - for simplicity, we'll log it and continue with an empty slice
 		posts = []*models.Post{}

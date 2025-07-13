@@ -17,7 +17,7 @@ type InMemoryBlogRepository struct {
 }
 
 func NewInMemoryBlogRepository() *InMemoryBlogRepository {
-	posts, err := data.LoadPosts()
+	posts, err := data.GetPosts()
 	if err != nil {
 		// Handle error gracefully - return empty repository
 		fmt.Printf("Error loading posts: %v\n", err)

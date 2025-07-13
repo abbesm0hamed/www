@@ -18,7 +18,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func LoadPosts() ([]*models.Post, error) {
+func GetPosts() ([]*models.Post, error) {
 	postsDir := "content/posts"
 	var posts []*models.Post
 
