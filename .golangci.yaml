@@ -1,4 +1,14 @@
 version: "2"
+
+run:
+  timeout: 5m
+  tests: false
+  skip-dirs:
+    - vendor
+    - third_party
+    - builtin
+    - examples
+
 linters:
   enable:
     - bodyclose
@@ -11,44 +21,168 @@ linters:
     - revive
     - staticcheck
     - tagliatelle
-    #- wsl
-  settings:
-    misspell:
-      locale: UK
-    revive:
-      confidence: 0.5
-      severity: error
-      enable-all-rules: false
+    - gofmt # Basic formatting
+    - goimports # Import organization
+    - govet # Go vet checks
+    - ineffassign # Detect ineffectual assignments
+    - unused # Detect unused variables/functions
+    - errcheck # Check for unchecked errors
+    - gocritic # Comprehensive Go linter
+    - unconvert # Remove unnecessary type conversions
+    - whitespace # Detect leading/trailing whitespace
+    - gofumpt # Stricter gofmt
+    - wsl # Whitespace linter (uncommented for better formatting)
+
+  disable:
+    - typecheck # Can be slow and sometimes inaccurate
+
+linters-settings:
+  misspell:
+    locale: UK
+
+  revive:
+    confidence: 0.5
+    severity: error
+    enable-all-rules: false
+    rules:
+      - name: line-length-limit
+        arguments: [120]
+        severity: error
+      - name: var-naming
+        severity: error
+      - name: exported
+        severity: error
+      - name: package-comments
+        severity: warning
+      - name: indent-error-flow
+        severity: error
+      - name: blank-imports
+        severity: error
+      - name: context-as-argument
+        severity: error
+      - name: dot-imports
+        severity: error
+      - name: error-return
+        severity: error
+      - name: error-strings
+        severity: error
+      - name: error-naming
+        severity: error
+      - name: increment-decrement
+        severity: error
+      - name: var-declaration
+        severity: error
+      - name: range
+        severity: error
+      - name: receiver-naming
+        severity: error
+      - name: time-naming
+        severity: error
+      - name: unexported-naming
+        severity: error
+      - name: indent-error-flow
+        severity: error
+      - name: errorf
+        severity: error
+      - name: empty-block
+        severity: error
+      - name: superfluous-else
+        severity: error
+      - name: unused-parameter
+        severity: error
+      - name: unreachable-code
+        severity: error
+      - name: redefines-builtin-id
+        severity: error
+
+  tagliatelle:
+    case:
       rules:
-        - name: line-length-limit
-          arguments:
-            - 120
-          severity: error
-        - name: var-naming
-          severity: error
-    tagliatelle:
-      case:
-        rules:
-          json: goCamel
-          yaml: goCamel
-        use-field-name: true
-  exclusions:
-    generated: lax
-    presets:
-      - comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
-formatters:
-  enable:
-    - gofmt
-  exclusions:
-    generated: lax
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+        json: goCamel
+        yaml: goCamel
+      use-field-name: true
+
+  gofmt:
+    simplify: true
+
+  goimports:
+    local-prefixes: github.com/abbesm0hamed/
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+      - experimental
+      - opinionated
+    disabled-checks:
+      - whyNoLint
+      - unnamedResult
+      - hugeParam
+
+  cyclop:
+    max-complexity: 15
+    package-average: 10.0
+    skip-tests: true
+
+  gocyclo:
+    min-complexity: 15
+
+  whitespace:
+    multi-if: true
+    multi-func: true
+
+  wsl:
+    # Controls for whitespace linter
+    strict-append: true
+    allow-assign-and-call: true
+    allow-assign-and-anything: false
+    allow-multiline-assign: true
+    force-case-trailing-whitespace: 0
+    force-err-cuddling: false
+    force-short-decl-cuddling: false
+    allow-separated-leading-comment: false
+    allow-trailing-comment: false
+    allow-case-traling-whitespace: false
+    allow-cuddle-declarations: false
+    allow-first-line-comment: false
+
+issues:
+  exclude-use-default: false
+  exclude-rules:
+    # Exclude some linters from running on tests files
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - gosec
+        - gocritic
+
+    # Exclude some staticcheck messages
+    - linters:
+        - staticcheck
+      text: "SA9003:"
+
+    # Exclude lll issues for long lines with go:generate
+    - linters:
+        - lll
+      source: "^//go:generate "
+
+  # Maximum issues count per one linter
+  max-issues-per-linter: 0
+
+  # Maximum count of issues with the same text
+  max-same-issues: 0
+
+  # Show only new issues created after git revision
+  new: false
+
+  # Show only new issues created in git patch with set file path
+  new-from-patch: ""
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+  uniq-by-line: true
+  sort-results: true

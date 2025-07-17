@@ -1,79 +1,72 @@
 package views
 
 import (
-	"github.com/abbesm0hamed/www/cmd/models"
-	"github.com/abbesm0hamed/www/cmd/web/components"
+"github.com/abbesm0hamed/www/cmd/models"
+"github.com/abbesm0hamed/www/cmd/web/components"
 )
 
 templ Home(experiences []models.Experience, skills []models.Skill, projects []models.Project, posts []*models.Post) {
-	@Base("Abbes Portfolio") {
-		@components.Container(homeContent(experiences, skills, projects, posts))
-	}
+@Base("Abbes Mohamed") {
+@components.Container(homeContent(experiences, skills, projects, posts))
+}
 }
 
-templ homeContent(experiences []models.Experience, skills []models.Skill, projects []models.Project, posts []*models.Post) {
-	@components.PageTitle("Software Engineer")
-	<div class="container mx-auto px-4 py-12">
-		<h1 class="text-4xl font-bold mb-6">Contact me if you can!</h1>
-		<p class="text-lg mb-8">Here you can find a brief overview of my skills, experiences, projects, and latest blog posts. Feel free to explore!</p>
+templ homeContent(experiences []models.Experience, skills []models.Skill, projects []models.Project,
+posts []*models.Post) {
+@components.PageTitle("Software Engineer")
+<div class="container mx-auto px-4 py-12">
+	<h1 class="text-4xl font-bold mb-6">Contact me if you can!</h1>
+	<p class="text-lg mb-8">Here you can find a brief overview of my skills, experiences, projects, and latest blog posts.
+		Feel free to explore!</p>
 
-		<!-- Skills Section -->
-		<section class="mb-12">
-			@components.SectionTitle("Skills")
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				for i, skill := range skills {
-					if i < 6 {
-						@components.SkillCard(skill)
-					}
-				}
-			</div>
-			<a href="/skills" class="inline-block mt-4 text-indigo-600 hover:underline">View All Skills</a>
-		</section>
+	<!-- Skills Section -->
+	<section class="mb-12">
+		@components.SectionTitle("Skills")
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			for _, skill := range skills[:6] {
+			@components.SkillCard(skill)
+			}
+		</div>
+		<a href="/skills" class="inline-block mt-4 text-indigo-600 hover:underline">View All Skills</a>
+	</section>
 
-		<!-- Experiences Section -->
-		<section class="mb-12">
-			@components.SectionTitle("Experiences")
-			<div class="space-y-6">
-				for i, exp := range experiences {
-					if i < 2 {
-						@components.ExperienceCard(exp)
-					}
-				}
-			</div>
-			<a href="/experiences" class="inline-block mt-4 text-indigo-600 hover:underline">View All Experiences</a>
-		</section>
+	<!-- Experiences Section -->
+	<section class="mb-12">
+		@components.SectionTitle("Experiences")
+		<div class="space-y-6">
+			for _, exp := range experiences[:2] {
+			@components.ExperienceCard(exp) }
+		</div>
+		<a href="/experiences" class="inline-block mt-4 text-indigo-600 hover:underline">View All Experiences</a>
+	</section>
 
-		<!-- Projects Section -->
-		<section class="mb-12">
-			@components.SectionTitle("Projects")
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				for i, project := range projects {
-					if i < 4 {
-						@components.ProjectCard(project)
-					}
-				}
-			</div>
-			<a href="/projects" class="inline-block mt-4 text-indigo-600 hover:underline">View All Projects</a>
-		</section>
+	<!-- Projects Section -->
+	<section class="mb-12">
+		@components.SectionTitle("Projects")
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			for _, project := range projects[:4] {
+			@components.ProjectCard(project) }
+		</div>
+		<a href="/projects" class="inline-block mt-4 text-indigo-600 hover:underline">View All Projects</a>
+	</section>
 
-		<!-- Blog Posts Section -->
-		<section class="mb-12">
-			@components.SectionTitle("Latest Blog Posts")
-			<div class="space-y-6">
-				for i, post := range posts {
-					if i < 3 {
-						@BlogCard(post)
-					}
-				}
-			</div>
-			<a href="/blog" class="inline-block mt-4 text-indigo-600 hover:underline">View All Blog Posts</a>
-		</section>
+	<!-- Blog Posts Section -->
+	<section class="mb-12">
+		@components.SectionTitle("Latest Blog Posts")
+		<div class="space-y-6">
+			for _, post := range posts[:3] {
+			@BlogCard(post) }
+		</div>
+		<a href="/blog" class="inline-block mt-4 text-indigo-600 hover:underline">View All Blog Posts</a>
+	</section>
 
-		<!-- CTA to Contact -->
-		<section class="text-center py-10 bg-indigo-50 rounded-lg">
-			<h2 class="text-3xl font-semibold mb-4">Get in Touch</h2>
-			<p class="text-lg mb-6">Interested in collaborating or have any questions? Reach out to me!</p>
-			<a href="/contact" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition duration-300">Contact Me</a>
-		</section>
-	</div>
+	<!-- CTA to Contact -->
+	<section class="text-center py-10 bg-indigo-50 rounded-lg">
+		<h2 class="text-3xl font-semibold mb-4">Get in Touch</h2>
+		<p class="text-lg mb-6">Interested in collaborating or have any questions? Reach out to me!</p>
+		<a href="/contact"
+			class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 transition duration-300">Contact
+			Me</a>
+	</section>
+</div>
 }
