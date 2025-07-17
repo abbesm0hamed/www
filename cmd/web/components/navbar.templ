@@ -2,7 +2,31 @@ package components
 
 import "github.com/abbesm0hamed/www/cmd/web/components/icons"
 
+type NavLink struct {
+URL string
+Label string
+}
+
+type SocialLink struct {
+URL string
+Label string
+Icon templ.Component
+}
+
 templ Navbar() {
+{{ navLinks := []NavLink{
+{URL: "/about", Label: "About"},
+{URL: "/projects", Label: "Projects"},
+{URL: "/experiences", Label: "Experiences"},
+{URL: "/blog", Label: "Blog"},
+{URL: "/contact", Label: "Contact"},
+} }}
+
+{{ socialLinks := []SocialLink{
+{URL: "https://github.com/abbesm0hamed", Label: "GitHub", Icon: icons.GitHubIcon("w-5 h-5")},
+{URL: "https://www.linkedin.com/in/mohamed-abbes-4084b516b/", Label: "LinkedIn", Icon: icons.LinkedInIcon("w-5 h-5")},
+} }}
+
 <nav class="bg-white shadow-sm border-b border-gray-200">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex justify-between items-center h-16">
@@ -11,32 +35,20 @@ templ Navbar() {
 					<img src="/assets/images/favicon.svg" alt="Abbes Logo" class="h-12 w-auto" />
 				</a>
 				<div class="hidden md:flex space-x-6">
-					<a href="/about" class="text-gray-600 hover:text-gray-900 transition-colors">
-						About
+					for _, link := range navLinks {
+					<a href={ templ.URL(link.URL) } class="text-gray-600 hover:text-gray-900 transition-colors">
+						{ link.Label }
 					</a>
-					<a href="/projects" class="text-gray-600 hover:text-gray-900 transition-colors">
-						Projects
-					</a>
-					<a href="/experiences" class="text-gray-600 hover:text-gray-900 transition-colors">
-						Experiences
-					</a>
-					<a href="/blog" class="text-gray-600 hover:text-gray-900 transition-colors">
-						Blog
-					</a>
-					<a href="/contact" class="text-gray-600 hover:text-gray-900 transition-colors">
-						Contact
-					</a>
+					}
 				</div>
 			</div>
 			<div class="hidden md:flex items-center space-x-4">
-				<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
+				for _, social := range socialLinks {
+				<a href={ templ.URL(social.URL) } target="_blank" rel="noopener noreferrer"
 					class="text-gray-600 hover:text-gray-900 transition-colors">
-					@icons.GitHubIcon("w-5 h-5")
+					@social.Icon
 				</a>
-				<a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
-					class="text-gray-600 hover:text-gray-900 transition-colors">
-					@icons.LinkedInIcon("w-5 h-5")
-				</a>
+				}
 			</div>
 			<!-- Mobile menu button -->
 			<div class="md:hidden">
@@ -58,51 +70,28 @@ templ Navbar() {
 	<!-- Mobile menu -->
 	<div id="mobile-menu" class="md:hidden hidden">
 		<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-			<a href="/about"
+			for _, link := range navLinks {
+			<a href={ templ.URL(link.URL) }
 				class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
-				About
+				{ link.Label }
 			</a>
-			<a href="/projects"
-				class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
-				Projects
-			</a>
-			<a href="/experiences"
-				class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
-				Experiences
-			</a>
-			<a href="/blog"
-				class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
-				Blog
-			</a>
-			<a href="/contact"
-				class="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors">
-				Contact
-			</a>
+			}
 		</div>
 		<!-- Mobile social links -->
 		<div class="px-5 py-3 bg-gray-50 border-t border-gray-200">
 			<div class="flex justify-center space-x-6">
-				<a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
+				for _, social := range socialLinks {
+				<a href={ templ.URL(social.URL) } target="_blank" rel="noopener noreferrer"
 					class="text-gray-600 hover:text-gray-900 transition-colors">
-					<span class="sr-only">GitHub</span>
-					@icons.GitHubIcon("w-5 h-5")
+					<span class="sr-only">{ social.Label }</span>
+					@social.Icon
 				</a>
-				<a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
-					class="text-gray-600 hover:text-gray-900 transition-colors">
-					<span class="sr-only">LinkedIn</span>
-					@icons.LinkedInIcon("w-5 h-5")
-				</a>
-				<a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer"
-					class="text-gray-600 hover:text-gray-900 transition-colors">
-					<span class="sr-only">Twitter</span>
-					@icons.TwitterIcon("w-5 h-5")
-				</a>
+				}
 			</div>
 		</div>
 	</div>
 </nav>
 <script>
-	// Mobile menu toggle functionality
 	document.addEventListener('DOMContentLoaded', function () {
 		const mobileMenuButton = document.getElementById('mobile-menu-button');
 		const mobileMenu = document.getElementById('mobile-menu');
