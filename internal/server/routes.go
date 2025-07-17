@@ -3,10 +3,10 @@ package server
 import (
 	"net/http"
 
-	"github.com/abbesm0hamed/portfolio/cmd/repository"
-	"github.com/abbesm0hamed/portfolio/cmd/services"
-	"github.com/abbesm0hamed/portfolio/cmd/web"
-	"github.com/abbesm0hamed/portfolio/cmd/web/handlers"
+	"github.com/abbesm0hamed/www/cmd/repository"
+	"github.com/abbesm0hamed/www/cmd/services"
+	"github.com/abbesm0hamed/www/cmd/web"
+	"github.com/abbesm0hamed/www/cmd/web/handlers"
 )
 
 func (s *Server) RegisterRoutes() http.Handler {

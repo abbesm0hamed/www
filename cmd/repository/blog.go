@@ -3,8 +3,8 @@ package repository
 import (
 	"fmt"
 
-	"github.com/abbesm0hamed/portfolio/cmd/data"
-	"github.com/abbesm0hamed/portfolio/cmd/models"
+	"github.com/abbesm0hamed/www/cmd/data"
+	"github.com/abbesm0hamed/www/cmd/models"
 )
 
 type BlogRepository interface {

@@ -4,7 +4,7 @@ before:
     - go mod tidy
 
 env:
-  - PACKAGE_PATH=github.com/abbesm0hamed/portfolio/cmd
+  - PACKAGE_PATH=github.com/abbesm0hamed/www/cmd
 
 builds:
   - binary: "{{ .ProjectName }}"

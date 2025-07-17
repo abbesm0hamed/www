@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os/signal"
-	"github.com/abbesm0hamed/portfolio/internal/server"
+	"github.com/abbesm0hamed/www/internal/server"
 	"syscall"
 	"time"
 )

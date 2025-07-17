@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/abbesm0hamed/portfolio/cmd/data"
-	"github.com/abbesm0hamed/portfolio/cmd/models"
-	"github.com/abbesm0hamed/portfolio/cmd/web/views"
+	"github.com/abbesm0hamed/www/cmd/data"
+	"github.com/abbesm0hamed/www/cmd/models"
+	"github.com/abbesm0hamed/www/cmd/web/views"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {

@@ -3,7 +3,7 @@ package data
 import (
 	"time"
 
-	"github.com/abbesm0hamed/portfolio/cmd/models"
+	"github.com/abbesm0hamed/www/cmd/models"
 )
 
 var Projects = []models.Project{
@@ -54,7 +54,7 @@ var Projects = []models.Project{
 		EndDate:      &[]time.Time{time.Date(2024, 1, 15, 0, 0, 0, 0, time.UTC)}[0],
 		Status:       "completed",
 		Technologies: []string{"Go", "HTML", "CSS", "JavaScript", "Docker"},
-		GitHubURL:    "https://github.com/abbesm0hamed/portfolio",
+		GitHubURL:    "https://github.com/abbesm0hamed/www",
 		LiveURL:      "https://abbesm0hamed.dev",
 		Category:     "Web Application",
 		Featured:     true,

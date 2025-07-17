@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/abbesm0hamed/portfolio/cmd/models"
-	"github.com/abbesm0hamed/portfolio/cmd/services"
-	"github.com/abbesm0hamed/portfolio/cmd/web/views"
+	"github.com/abbesm0hamed/www/cmd/models"
+	"github.com/abbesm0hamed/www/cmd/services"
+	"github.com/abbesm0hamed/www/cmd/web/views"
 )
 
 type ContactHandler struct {

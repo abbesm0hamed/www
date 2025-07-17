@@ -1,7 +1,7 @@
 package data
 
 import (
-	"github.com/abbesm0hamed/portfolio/cmd/models"
+	"github.com/abbesm0hamed/www/cmd/models"
 )
 
 var Skills = []models.Skill{
