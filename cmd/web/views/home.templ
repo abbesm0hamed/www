@@ -54,8 +54,9 @@ posts []*models.Post) {
 	<section class="mb-12">
 		@components.SectionTitle("Latest Blog Posts")
 		<div class="space-y-6">
-			for _, post := range posts[:3] {
-			@BlogCard(post) }
+			for _, post := range posts[:min(3, len(posts))] {
+			@BlogCard(post)
+			}
 		</div>
 		<a href="/blog" class="inline-block mt-4 text-indigo-600 hover:underline">View All Blog Posts</a>
 	</section>
