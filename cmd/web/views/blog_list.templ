@@ -6,14 +6,14 @@ import (
 )
 
 templ BlogList(posts []*models.Post) {
-@Base("Blog - Portfolio") {
+@Base("Abbes Mohamed - Blog") {
 @components.Container(BlogListContent(posts))
 }
 }
 
 templ BlogListContent(posts []*models.Post) {
 @components.PageTitle("Blog")
-<div class="space-y-8 container">
+<div class="space-y-8">
   if len(posts) == 0 {
   <div class="text-center py-12">
     <p class="text-gray-500 text-lg">No blog posts found.</p>

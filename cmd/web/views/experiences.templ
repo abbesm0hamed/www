@@ -6,7 +6,7 @@ import (
 )
 
 templ ExperiencesPage(experiences []models.Experience) {
-@Base("Experiences - Portfolio"){
+@Base("Abbes Mohamed - Experiences"){
 @components.Container(ExperiencesContent(experiences))
 }
 }
@@ -14,7 +14,7 @@ templ ExperiencesPage(experiences []models.Experience) {
 templ ExperiencesContent(experiences []models.Experience) {
 @components.PageTitle("Work Experience")
 
-<div class="space-y-6 container">
+<div class="space-y-6">
   if len(experiences) == 0 {
   <div class="text-center py-12">
     <p class="text-gray-500 text-lg">No experiences found.</p>

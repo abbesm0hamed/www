@@ -3,7 +3,7 @@ package views
 import "github.com/abbesm0hamed/www/cmd/web/components"
 
 templ ContactPage() {
-@Base("Contact - Portfolio"){
+@Base("Abbes Mohamed - Contact"){
 @components.Container(ContactContent())
 }
 }
@@ -11,13 +11,13 @@ templ ContactPage() {
 templ ContactContent() {
 @components.PageTitle("Get In Touch")
 
-<div class="container text-left mb-8">
+<div class="text-left mb-8">
   <p class="text-xl text-gray-600">
     Have a project in mind or just want to say hello? I'd love to hear from you.
   </p>
 </div>
 
-<div class="container">
+<div class="">
   <div class="bg-white rounded-lg shadow-md p-8">
     @ContactForm()
   </div>
