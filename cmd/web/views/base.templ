@@ -12,6 +12,32 @@ templ Base(title string) {
 	<title>{ title }</title>
 	<link href="/assets/css/output.css" rel="stylesheet" />
 	<script src="/assets/js/htmx.min.js"></script>
+	<script>
+		document.body.addEventListener("htmx:afterSwap", (e) => {
+			if (window.templUI) {
+				Object.values(window.templUI).forEach(comp => {
+					comp.init?.(e.detail.elt);
+				});
+			}
+		});
+
+		document.body.addEventListener("htmx:oobAfterSwap", (e) => {
+			if (window.templUI) {
+				Object.values(window.templUI).forEach(comp => {
+					comp.init?.(e.detail.target);
+				});
+			}
+		});
+
+		// Cleanup before swap (for components with event listeners)
+		document.body.addEventListener("htmx:beforeSwap", (e) => {
+			if (window.templUI) {
+				Object.values(window.templUI).forEach(comp => {
+					comp.cleanup?.(e.detail.target);
+				});
+			}
+		});
+	</script>
 
 	<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
 	<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
@@ -24,7 +50,7 @@ templ Base(title string) {
 
 <body class="bg-gray-100 min-h-screen flex flex-col">
 	@components.Navbar()
-	<main class="max-w-5xl mx-auto p-4 flex-1">
+	<main class="flex-1">
 		{ children... }
 	</main>
 	@components.Footer()

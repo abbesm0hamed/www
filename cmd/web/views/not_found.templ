@@ -1,0 +1,22 @@
+package views
+import "github.com/abbesm0hamed/www/cmd/web/components"
+
+templ NotFound() {
+@Base("404 - Page Not Found") {
+@components.Container(notFoundContent())
+}
+}
+
+templ notFoundContent() {
+<div class="text-center space-y-6 h-full flex justify-center items-center">
+	<div class="container flex flex-col gap-8 justify-center items-center">
+		<h1 class="text-6xl font-bold text-gray-800">404</h1>
+		<h2 class="text-2xl font-semibold text-gray-600">Page Not Found</h2>
+		<p class="text-gray-500">The page you're looking for doesn't exist.</p>
+		<a href="/"
+			class="max-w-sm inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition-colors">
+			Go Home
+		</a>
+	</div>
+</div>
+}

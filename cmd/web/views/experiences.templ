@@ -14,7 +14,7 @@ templ ExperiencesPage(experiences []models.Experience) {
 templ ExperiencesContent(experiences []models.Experience) {
 @components.PageTitle("Work Experience")
 
-<div class="space-y-6">
+<div class="space-y-6 container">
   if len(experiences) == 0 {
   <div class="text-center py-12">
     <p class="text-gray-500 text-lg">No experiences found.</p>

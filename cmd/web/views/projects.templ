@@ -14,7 +14,7 @@ templ ProjectsPage(projects []models.Project) {
 templ ProjectsContent(projects []models.Project) {
 @components.PageTitle("Porjects")
 
-<div class="space-y-6">
+<div class="space-y-6 container">
   if len(projects) == 0 {
   <div class="text-center py-12">
     <p class="text-gray-500 text-lg">No projects found.</p>

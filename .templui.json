@@ -1,0 +1,7 @@
+{
+  "componentsDir": "cmd/web/components",
+  "utilsDir": "cmd/web/utils",
+  "moduleName": "github.com/abbesm0hamed/www",
+  "jsDir": "cmd/web/assets/js",
+  "jsPublicPath": "/cmd/web/assets/js"
+}
