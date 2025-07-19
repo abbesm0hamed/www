@@ -137,18 +137,56 @@
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
-  ::selection {
-    @apply bg-selection text-selection-foreground;
-  }
-
   body {
     @apply bg-background text-foreground;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+  }
+}
+
+@layer base {
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-border;
+  }
+  * {
+    @apply min-w-0;
+  }
+  html {
+    text-rendering: optimizelegibility;
+    opacity: 0;
+  }
+  html[data-theme="dark"],
+  html[data-theme="light"] {
+    opacity: initial;
+  }
+  body {
+    @apply min-h-[100dvh];
+  }
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-muted-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: unset;
+    font-weight: unset;
   }
 }
 

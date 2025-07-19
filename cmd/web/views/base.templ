@@ -1,5 +1,4 @@
 package views
-
 import "github.com/abbesm0hamed/www/cmd/web/components"
 
 templ Base(title string) {
@@ -12,6 +11,22 @@ templ Base(title string) {
 	<title>{ title }</title>
 	<link href="/assets/css/output.css" rel="stylesheet" />
 	<script src="/assets/js/htmx.min.js"></script>
+	<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+	<link rel="shortcut icon" href="/assets/images/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+	<meta name="apple-mobile-web-app-title" content="Abbes" />
+	<link rel="manifest" href="/assets/images/site.webmanifest" />
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+	@components.Navbar()
+	<main class="flex-1">
+		{ children... }
+	</main>
+	@components.Footer()
+
+	<!-- Script moved to bottom - document.body is now available -->
 	<script>
 		document.body.addEventListener("htmx:afterSwap", (e) => {
 			if (window.templUI) {
@@ -20,7 +35,6 @@ templ Base(title string) {
 				});
 			}
 		});
-
 		document.body.addEventListener("htmx:oobAfterSwap", (e) => {
 			if (window.templUI) {
 				Object.values(window.templUI).forEach(comp => {
@@ -28,7 +42,6 @@ templ Base(title string) {
 				});
 			}
 		});
-
 		// Cleanup before swap (for components with event listeners)
 		document.body.addEventListener("htmx:beforeSwap", (e) => {
 			if (window.templUI) {
@@ -38,22 +51,6 @@ templ Base(title string) {
 			}
 		});
 	</script>
-
-	<link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
-	<link rel="shortcut icon" href="/assets/images/favicon.ico" />
-	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
-	<meta name="apple-mobile-web-app-title" content="Abbes" />
-	<link rel="manifest" href="/assets/images/site.webmanifest" />
-
-</head>
-
-<body class="bg-gray-100 min-h-screen flex flex-col">
-	@components.Navbar()
-	<main class="flex-1">
-		{ children... }
-	</main>
-	@components.Footer()
 </body>
 
 </html>
