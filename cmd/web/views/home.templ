@@ -14,13 +14,16 @@ templ Home(experiences []models.Experience, skills []models.Skill, projects []mo
 templ homeContent(experiences []models.Experience, skills []models.Skill, projects []models.Project,
 posts []*models.Post) {
 @components.PageTitle("Software Engineer")
-<div class="py-12">
-	<h1 class="text-4xl font-bold mb-6">Contact me if you can!</h1>
-	<p class="text-lg mb-8">Here you can find a brief overview of my skills, experiences, projects, and latest blog posts.
+<div class="fading-border-b">
+	<h1 class="container py-4 fading-border fading-border text-3xl font-semibold">Contact me if you
+		can!
+	</h1>
+	<p class="text-lg py-4 container">Here you can find a brief overview of my skills, experiences, projects, and latest
+		blog posts.
 		Feel free to explore!</p>
 
 	<!-- Skills Section -->
-	<section class="mb-12">
+	<section class="py-8 container fading-border">
 		@components.SectionTitle("Skills")
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			for _, skill := range skills[:6] {

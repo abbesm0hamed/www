@@ -22,13 +22,15 @@ templ Navbar() {
 {URL: "/contact", Label: "Contact"},
 } }}
 
-{{ socialLinks := []SocialLink{
+{{
+socialLinks := []SocialLink{
 {URL: "https://github.com/abbesm0hamed", Label: "GitHub", Icon: icons.GitHubIcon("w-5 h-5")},
 {URL: "https://www.linkedin.com/in/mohamed-abbes-4084b516b/", Label: "LinkedIn", Icon: icons.LinkedInIcon("w-5 h-5")},
-} }}
+}
+}}
 
-<nav class="bg-white shadow-sm border-b border-gray-200">
-	<div class="container w-full">
+<nav class="bg-background fading-border-b">
+	<div class="container w-full fading-border-r fading-border-l">
 		<div class="flex justify-between items-center h-16">
 			<div class="flex items-center space-x-8">
 				<a href="/" class="flex items-center">
